@@ -10,6 +10,12 @@ export class EggdonationComponent implements OnInit {
 
   checked = false;
   showForm: boolean = true;
+  lastsaveTS:Date=null;
+  autosavecontrol=null;
+  lastsavedvalues:any={};
+  cur_db_values:any =null;
+  organization:any;
+  form_progress:any={};
 
   constructor() { }
 
@@ -79,4 +85,12 @@ export class EggdonationComponent implements OnInit {
     */
   });
 
+  onSubmit() {
+    if (this.form.valid) {
+      console.log("Form Submitted!", this.form.value);
+      /* this.Submit(this.service.form.value).subscribe((result) => {
+        console.warn("Result is here", result);
+      }) */
+    }
+  }
 }
