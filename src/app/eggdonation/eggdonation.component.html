@@ -1,0 +1,584 @@
+<div class="container" style="background:#ffffff;width:98%" >
+<br><br>
+<!-- <table width=98%>
+  <tr>
+    <td><h1><b>{{organization.tenantName.toUpperCase()}} Egg Donation</b></h1>
+    </td>
+    <td width=20% valign=center>
+      <span *ngIf="form_progress.formstatus=='prescan-completed'">
+        <font color='#6666ff'> <b>  Form Submitted </b></font>
+      </span>
+    </td>
+    <td valign=top align=center width=100>
+
+      <div class="twitter-like">
+        <mat-spinner class="gcbackground" 
+            mode="determinate" 
+          value="100" diameter="32" strokeWidth="6" >
+        </mat-spinner>
+        <mat-spinner class="gcprogress" diameter="32"  mode="determinate" strokeWidth="6"  
+        value={{form_progress.percent}}></mat-spinner>
+        </div>
+  </td>
+  <td width=120 valign=top>
+    <font color=green> <b>
+      {{form_progress.percent}}%
+    </b> required fields completed</font>
+  </td>
+  <td width=30></td>
+  </tr>
+</table>
+
+<span *ngIf="lastsaveTS"><font size=-1 color=green><i>last saved at {{lastsaveTS}}</i></font></span> -->
+<table>
+    <td><tr><mat-icon style="display: inline-flex; vertical-align: top;">information</mat-icon></tr></td>
+    <td><tr><p>Egg donation involves a screening process. Not all potential egg donors are selected. Not all selected egg donors receive the monetary amounts or compensation advertised. As with any medical procedure, there may be risks associated with human egg donation. Before an egg donor agrees to begin the egg donation process, and signs a legally binding contract, she is required to receive specific information on the known risks of egg donation. Consultation with your doctor prior to entering into a donor contract is advised.</p></tr></td>
+</table>
+
+<form *ngIf="showForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <table style="display: inline-block; margin: auto 0">
+    <tr>
+      <td>
+        <mat-label><b>1. First Name </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" maxlength="50" required>
+          <mat-error *ngIf="form.controls['firstName'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label><b>2. Last Name </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" maxlength="50" required>
+          <mat-error *ngIf="form.controls['lastName'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label><b>3. Email </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" maxlength="50" required>
+          <mat-error *ngIf="form.controls['email'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label><b>4. Confirm Email </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Email</mat-label>
+          <input matInput formControlName="confirm_email" maxlength="50" required>
+          <mat-error *ngIf="form.controls['confirm_email'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <mat-label><b>5. Cell Number </b></mat-label><font color=red>*</font><br>
+      <mat-form-field appearance="outline">
+        <mat-label>Cell Number</mat-label>
+        <input matInput formControlName="telephone_number" maxlength="50" required>
+        <mat-error *ngIf="form.controls['telephone_number'].errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+    </tr>
+    <tr>
+      <td>
+        <mat-label><b>6. Address </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="streetAdd" maxlength="500" required>
+          <mat-error *ngIf="form.controls['streetAdd'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label><b>7. Address 2 </b></mat-label><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Address 2</mat-label>
+          <input matInput formControlName="address_2" maxlength="500" required>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <mat-label><b>8. City </b></mat-label><font color=red>*</font><br>
+      <mat-form-field appearance="outline">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" maxlength="500" required>
+        <mat-error *ngIf="form.controls['city'].errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+      </td>
+      <td>
+        <mat-label><b>9. State </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state" required>
+            <mat-option value="Alabama">AL</mat-option>
+            <mat-option value="Alaska">AK</mat-option>
+            <mat-option value="Arizona">AZ</mat-option>
+            <mat-option value="Arkansas">AR</mat-option>
+            <mat-option value="California">CA</mat-option>
+            <mat-option value="Colorado">CO</mat-option>
+            <mat-option value="Connecticut">CT</mat-option>
+            <mat-option value="Delaware">DE</mat-option>
+            <mat-option value="Florida">FL</mat-option>
+            <mat-option value="Georgia">GA</mat-option>
+            <mat-option value="Hawaii">HI</mat-option>
+            <mat-option value="Idaho">ID</mat-option>
+            <mat-option value="Illinois">IL</mat-option>
+            <mat-option value="Indiana">IN</mat-option>
+            <mat-option value="Iowa">IA</mat-option>
+            <mat-option value="Kansas">KS</mat-option>
+            <mat-option value="Kentucky">KY</mat-option>
+            <mat-option value="Louisiana">LA</mat-option>
+            <mat-option value="Maine">ME</mat-option>
+            <mat-option value="Maryland ">MD</mat-option>
+            <mat-option value="Massachusetts">MA</mat-option>
+            <mat-option value="Michigan">MI</mat-option>
+            <mat-option value="Minnesota">MN</mat-option>
+            <mat-option value="Mississippi">MS</mat-option>
+            <mat-option value="Missouri">MO</mat-option>
+            <mat-option value="Montana">MT</mat-option>
+            <mat-option value="Nebraska">NE</mat-option>
+            <mat-option value="Nevada">NV</mat-option>
+            <mat-option value="New Hampshire">NH</mat-option>
+            <mat-option value="New Jersey">NJ</mat-option>
+            <mat-option value="New Mexico">NM</mat-option>
+            <mat-option value="New York">NY</mat-option>
+            <mat-option value="North Carolina">NC</mat-option>
+            <mat-option value="North Dakota">ND</mat-option>
+            <mat-option value="Ohio">OH</mat-option>
+            <mat-option value="Oklahoma">OK</mat-option>
+            <mat-option value="Oregon">OR</mat-option>
+            <mat-option value="Pennsylvania">PA</mat-option>
+            <mat-option value="Rhode Island">RI</mat-option>
+            <mat-option value="South Carolina">SC</mat-option>
+            <mat-option value="South Dakota">SD</mat-option>
+            <mat-option value="Tennessee">TN</mat-option>
+            <mat-option value="Texas">TX</mat-option>
+            <mat-option value="Utah">UT</mat-option>
+            <mat-option value="Vermont">VT</mat-option>
+            <mat-option value="Virginia">VA</mat-option>
+            <mat-option value="Washington">WA</mat-option>
+            <mat-option value="West Virginia">WV</mat-option>
+            <mat-option value="Wisconsin">WI</mat-option>
+            <mat-option value="Wyoming">WY</mat-option>
+            <mat-option value="N/A">N/A</mat-option>
+            <mat-option value="Overseas, please specify">Overseas, please specify</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label><b>10. Zip / Postal Code </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Zip Code</mat-label>
+          <input matInput formControlName="zip_code" maxlength="50" required>
+          <mat-error *ngIf="form.controls['zip_code'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label><b>11. Country </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" maxlength="500" required>
+          <mat-error *ngIf="form.controls['country'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <mat-label><b>12. Date of birth </b></mat-label><font color=red>*</font><br>
+      <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input formControlName="birthDate" matInput [matDatepicker]="picker" required>
+        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.controls['birthDate'].errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+    </td>
+      <td>
+        <mat-label><b>13. Country of birth </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Country of birth</mat-label>
+          <input matInput formControlName="country_birth" maxlength="500" required>
+          <mat-error *ngIf="form.controls['country_birth'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <mat-label><b>14. Height </b></mat-label><font color=red>*</font><br>
+          <mat-form-field class="height" appearance="outline">
+            <mat-label>Height</mat-label>
+            <input matInput type="number" min="1" maxlength="50" formControlName="height_feet" required>
+            <span matSuffix> feet</span>
+            <mat-error *ngIf="form.controls['height_feet'].errors?.required">This field is required.</mat-error>
+          </mat-form-field>
+      <!-- </td>
+      <td> -->
+          <mat-form-field class="height" appearance="outline">
+            <mat-label>Height</mat-label>
+            <input matInput type="number" min="1" maxlength="50" formControlName="height_in" required>
+            <span matSuffix> in</span>
+            <mat-error *ngIf="form.controls['height_in'].errors?.required">This field is required.</mat-error>
+          </mat-form-field>
+      </td>
+      <td>
+      <mat-label><b>15. Weight </b></mat-label><font color=red>*</font><br>
+      <mat-form-field appearance="outline">
+        <mat-label>Weight</mat-label>
+        <input matInput type="number" formControlName="weight" maxlength="50" required>
+        <span matSuffix>pounds</span>
+        <mat-error *ngIf="form.controls['weight'].errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+    </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-label><b>16. Eye Color </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Eye Color</mat-label>
+          <mat-select formControlName="eye_color" required>
+            <mat-option value="Blue">Blue</mat-option>
+            <mat-option value="Light Blue">Light Blue</mat-option>
+            <mat-option value="Dark Blue">Dark Blue</mat-option>
+            <mat-option value="Brown">Brown</mat-option>
+            <mat-option value="Light Brown">Light Brown</mat-option>
+            <mat-option value="Dark Brown">Dark Brown</mat-option>
+            <mat-option value="Green">Green</mat-option>
+            <mat-option value="Hazel">Hazel</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['eye_color'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-label><b>17. Natural Hair Color </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Natural Hair Color</mat-label>
+          <mat-select formControlName="hair_color" required>
+            <mat-option value="Black">Black</mat-option>
+            <mat-option value="Blonde">Blonde</mat-option>
+            <mat-option value="Light Blonde">Light Blonde</mat-option>
+            <mat-option value="Dark Blonde">Dark Blonde</mat-option>
+            <mat-option value="Strawberry Blonde">Strawberry Blonde</mat-option>
+            <mat-option value="Brown">Brown</mat-option>
+            <mat-option value="Light Brown">Light Brown</mat-option>
+            <mat-option value="Dark Brown">Dark Brown</mat-option>
+            <mat-option value="Red">Red</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['hair_color'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <mat-label><b>18. Blood Type </b></mat-label><font color=red>*</font><br>
+      <mat-form-field appearance="outline">
+        <mat-label>Blood Type</mat-label>
+        <mat-select formControlName="bloodType" required>
+          <mat-option value="A-">A-</mat-option>
+          <mat-option value="A+">A+</mat-option>
+          <mat-option value="B-">B-</mat-option>
+          <mat-option value="B+">B+</mat-option>
+          <mat-option value="AB-">AB-</mat-option>
+          <mat-option value="AB+">AB+</mat-option>
+          <mat-option value="O-">O-</mat-option>
+          <mat-option value="O+">O+</mat-option>
+          <mat-option value="Unknown">Unknown</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['bloodType'].errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+    </td>
+      <td>
+        <mat-label><b>19. What is your highest level of education? </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>What is your highest level of education?</mat-label>
+          <mat-select formControlName="highest_level_education" required>
+            <mat-option value="High school not completed">High school not completed</mat-option>
+            <mat-option value="High school completed">High school completed</mat-option>
+            <mat-option value="College enrolled or equivalent">College enrolled or equivalent</mat-option>
+            <mat-option value="College in progress or equivalent">College in progress or equivalent</mat-option>
+            <mat-option value="College completed or equivalent">College completed or equivalent</mat-option>
+            <mat-option value="Graduated school enrolled or equivalent">Graduated school enrolled or equivalent</mat-option>
+            <mat-option value="Graduated school in progress or equivalent">Graduated school in progress or equivalent</mat-option>
+            <mat-option value="Graduated school completed or equivalent">Graduated school completed or equivalent</mat-option>
+            <mat-option value="PHD enrolled or equivalent">PHD enrolled or equivalent</mat-option>
+            <mat-option value="PHD in progress or equivalent">PHD in progress or equivalent</mat-option>
+            <mat-option value="PHD completed or equivalent">PHD completed or equivalent</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['highest_level_education'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>20. Racial Background </b></mat-label><font color=red>*</font><br><br>
+        <mat-checkbox formControlName="Black">Black</mat-checkbox><br>
+        <mat-checkbox formControlName="Asian">Asian</mat-checkbox><br>
+        <mat-checkbox formControlName="Caucasian">Caucasian</mat-checkbox><br>
+        <mat-checkbox formControlName="Latina">Latina</mat-checkbox><br>
+        <mat-checkbox formControlName="Middle_Eastern">Middle Eastern</mat-checkbox>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>21. Are you a member of a Federally-recognized Indian tribe? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="tribe" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>22. Your Parentage </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="parentage" required>
+            <mat-radio-button class="add-right-padding" value="Natural Child of Parents">Natural Child of Parents</mat-radio-button><br>
+            <mat-radio-button class="add-right-padding" value="Adopted">Adopted</mat-radio-button><br>
+            <mat-radio-button class="add-right-padding" value="Donor Conceived">Donor Conceived</mat-radio-button><br>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <td>
+      <!-- <div class="add-bottom-padding"> -->
+        <mat-label><b>23. Have you had any biological children? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="bioChildren" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      <!-- </div> -->
+    </td>
+
+    </tr>
+    <br>
+    <!-- <tr>
+      <mat-label><b>22. If yes, please list ages of children</b></mat-label><br><br>
+      <mat-form-field appearance="outline">
+        <mat-label>If yes, please list ages of children</mat-label>
+        <textarea matInput formControlName="list_ages_children" maxlength="500"></textarea>
+      </mat-form-field>
+    </tr> -->
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>24. Are you currently pregnant? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="pregnant" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>25. Are you currently breastfeeding? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="breastfeeding" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>26. Do you have both ovaries? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="ovaries" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>27. Are you a frequent user of tobacco? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="tobacco" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>28. Have you, in the past two years, used any of the following: heroin, cocaine, barbiturates, or amphetamines? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="used" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>29. Are you currently taking medications for any of the following conditions: depression, anxiety, ADD/ADHD, or bipolar disorder? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="medications" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>30. Have you or any of your family members been diagnosed with alcoholism or drug addiction? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="alcoholism" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>31. Have you ever been convicted of a felony? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="felony" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <mat-label><b>32. Where did you FIRST hear about us? </b></mat-label><font color=red>*</font><br>
+      <mat-form-field appearance="outline">
+        <mat-label>Where did you FIRST hear about us?</mat-label>
+        <mat-select formControlName="hear_about_us" required>
+          <mat-option value="Campus newspaper">Campus newspaper</mat-option>
+          <mat-option value="Car Ad">Car Ad</mat-option>
+          <mat-option value="Clubhouse">Clubhouse</mat-option>
+          <mat-option value="Donor Referral (provide name)">Donor Referral (provide name)</mat-option>
+          <mat-option value="Facebook">Facebook</mat-option>
+          <mat-option value="Flyer on Campus">Flyer on Campus</mat-option>
+          <mat-option value="Google Ad">Google Ad</mat-option>
+          <mat-option value="Image Ad On a Website">Image Ad On a Website</mat-option>
+          <mat-option value="Instagram">Instagram</mat-option>
+          <mat-option value="Internet Research">Internet Research</mat-option>
+          <mat-option value="IVF Clinic, if so, which one?">IVF Clinic, if so, which one?</mat-option>
+          <mat-option value="Personal Referral (provide name)">Personal Referral (provide name)</mat-option>
+          <mat-option value="Podcast">Podcast</mat-option>
+          <mat-option value="Recruiter (provide name)">Recruiter (provide name)</mat-option>
+          <mat-option value="TikTok">TikTok</mat-option>
+          <mat-option value="Tumblr">Tumblr</mat-option>
+          <mat-option value="WeChat">WeChat</mat-option>
+          <mat-option value="Other (Specify)">Other (Specify)</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['hear_about_us'].errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+    </tr>
+    <!-- <tr>
+      <mat-label><b>36. Please explain</b></mat-label><br>
+      <mat-form-field appearance="outline">
+        <mat-label>Please explain</mat-label>
+        <textarea matInput formControlName="explain_about_us" maxlength="5000"></textarea>
+      </mat-form-field>
+    </tr> -->
+    <tr>
+      <div>
+        <mat-checkbox id="check" formControlName="check" [(ngModel)]="checked"><b>By checking this box, you give consent to Lucina Egg Bank to send promotional emails to you. You can unsubcribe the email later</b></mat-checkbox><br>
+        <b style="margin-left: 22px;">in your settings or by writing to Lucina Egg Bank <font color=red>*</font></b>
+      </div>
+    </tr>
+    <br>
+    <tr>
+      <div class="add-bottom-padding">
+        <mat-label><b>Do you understand this is an anonymous donation and you won't have contact or information of the receipent family. You totally agree</b></mat-label><br>
+        <b>to this! <font color=red>*</font><br><br></b>
+        <mat-radio-group formControlName="agree" required>
+            <mat-radio-button class="add-right-padding" value="Agree">Agree</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="Not Agree">Disagree</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </tr>
+    <br>
+    </table>
+    <!-- Old Forms -->
+    <!-- <td>
+      <tr>
+        <div class="add-bottom-padding">
+        <mat-label><b>10. Are you an experienced egg donor? </b></mat-label><font color=red>*</font><br><br>
+        <mat-radio-group formControlName="experience" required>
+            <mat-radio-button class="add-right-padding" value="Yes">Yes</mat-radio-button>
+            <mat-radio-button class="add-right-padding" value="No">No</mat-radio-button>
+        </mat-radio-group>
+        </div>
+      </tr>
+      <tr>
+        <mat-label><b>11. The closest description of your race </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>The closest description of your race</mat-label>
+          <input matInput formControlName="race" maxlength="500" required>
+          <mat-error *ngIf="form.controls['race'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </tr>
+      <tr> 
+        <mat-label><b>12. Are you or any of your family member registered to the BIA (Bureau of Indian Affairs)? </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Are you or any of your family member registered to the BIA (Bureau of Indian Affairs)?</mat-label>
+          <mat-select formControlName="registered_BIA" required>
+            <mat-option value="Yes">Yes</mat-option>
+            <mat-option value="No">No</mat-option>
+            <mat-option value="N/A">N/A</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['registered_BIA'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-label><b>19. Have you ever used medications such as antianxiety or antidepressants to treat an emotional or psychological problem? </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Have you ever used medications such as antianxiety or antidepressants to treat an emotional or psychological problem?</mat-label>
+          <mat-select formControlName="medications" required>
+            <mat-option value="No">No</mat-option>
+            <mat-option value="Yes - current">Yes - current</mat-option>
+            <mat-option value="Yes - used within the past 12 months">Yes - used within the past 12 months</mat-option>
+            <mat-option value="Yes - used over 12 months ago">Yes - used over 12 months ago</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['medications'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-label><b>20. If yes, please list why and date last used</b></mat-label><br>
+        <mat-form-field appearance="outline">
+          <mat-label>If yes, please list why and date last used</mat-label>
+          <textarea matInput formControlName="why_date_last_used" maxlength="5000"></textarea>
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-label><b>25. Do you or any family member have a history of disease or tested positive as a carrier? If yes, please list </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Do you or any family member have a history of disease or tested positive as a carrier? If yes, please list</mat-label>
+          <textarea matInput formControlName="yes_positive_carrier" maxlength="5000" required></textarea>
+          <mat-error *ngIf="form.controls['yes_positive_carrier'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-label><b>26. Preferred Language </b></mat-label><font color=red>*</font><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Preferred Language</mat-label>
+          <mat-select formControlName="preferred_languange" required>
+            <mat-option value="Engish">English</mat-option>
+            <mat-option value="Chinese">Chinese</mat-option>
+            <mat-option value="Others">Others</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['preferred_languange'].errors?.required">This field is required.</mat-error>
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-label><b>27. Please indicate "Others"</b></mat-label><br>
+        <mat-form-field appearance="outline">
+          <mat-label>Please indicate "Others"</mat-label>
+          <textarea matInput formControlName="others_languange" maxlength="500"></textarea>
+        </mat-form-field>
+      </tr>
+    </td> -->
+  <div class="button-row">
+    <!-- <button mat-raised-button class="bottom_buttons" color="warn" type="save_progress" (click)='saveData()' [disabled]="form_progress.formstatus=='prescan-completed'">SAVE PROGRESS <mat-icon>save</mat-icon></button> -->
+    <button mat-raised-button class="bottom_buttons" color="warn" type="submit" [disabled]="(!checked)||(!form.valid)||(form_progress.formstatus=='prescan-completed')" (click)='finalize()'>SUBMIT <mat-icon>task_alt</mat-icon></button>
+  </div>
+</form>
+</div>

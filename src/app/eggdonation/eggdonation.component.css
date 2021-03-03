@@ -1,0 +1,66 @@
+h1 {
+    color: #00a8f4;
+}
+
+.mat-form-field.mat-form-field {
+    /* margin-left: 25px; */
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    width: 400px;
+}
+
+.mat-radio-button {
+    margin-left: 20px;
+}
+
+.mat-checkbox {
+    margin-left: 20px;
+}
+
+.bottom_buttons{
+    font-size: 16px;
+    width: 400px !important;
+    min-width: unset!important;
+}
+
+.button-row {
+    margin: auto;
+    width: 400px !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex:hover .mat-form-field-outline {
+    color: green !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: green !important;
+}
+:host ::ng-deep .track circle{       
+    stroke-opacity: 0.3 !important;
+}
+
+/* .twitter-like{
+    .gcbackground {
+        stroke-opacity: 0.2 !important;
+    }
+    .mat-progress-spinner{
+        display: inline
+    }
+} */
+
+:host ::ng-deep .background circle{   
+    stroke: #0CC20C;
+}
+:host ::ng-deep .mat-progress-spinner circle{   
+    stroke: #0CC20C;
+}
+
+#check {
+    margin-left: 0px;
+}
+
+.height {
+    width: 180px !important;
+}
