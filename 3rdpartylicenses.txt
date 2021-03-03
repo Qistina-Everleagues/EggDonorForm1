@@ -305,6 +305,8 @@ MIT
 
 @angular/material/icon
 
+@angular/material/progress-spinner
+
 zone.js
 MIT
 The MIT License
